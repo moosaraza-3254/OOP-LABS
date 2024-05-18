@@ -1,0 +1,139 @@
+//#include<iostream>
+//using namespace std;
+//int stringLength(const char* str) {
+//	int length = 0;
+//	while (*str != '\0') {
+//		length++;
+//		str++;
+//	}
+//	return length;
+//}
+//string** CreateArray(int rows, int col) {
+//	string** arr = new string * [rows];
+//	for (int i = 0; i < rows; i++) {
+//		*(arr + i) = new string[col];
+//	}
+//	return arr;
+//}
+//void Input(string** arr, int rows, int col) {
+//	
+//	cout << "ENTER THE STRINGS FOR ARRAY: ";
+//	for (int i = 0; i < rows; i++) {
+//		for (int j = 0; j < col; j++) {
+//			cin >>*(*(arr+i)+j);
+//		}
+//	}
+//}
+//void Display(string** arr, int rows, int col) {
+//	cout << "2D ARRAY IS: ";
+//	for (int i = 0; i < rows; i++) {
+//		for (int j = 0; j < col; j++) {
+//			cout << *(*(arr + i) + j) << " ";
+//		}
+//		cout << endl;
+//	}
+//}
+//void findLongestInEachRow(string** arr, int rows, int cols) {
+//	cout << "Longest string in each row:" << endl;
+//	for (int i = 0; i < rows; i++) {
+//		int maxLength = 0;
+//		string longestString;
+//		for (int j = 0; j < cols; j++) {
+//			int length = stringLength(arr);
+//			if (length > maxLength) {
+//				maxLength = length;
+//				longestString = *(*(arr+i)+j);
+//			}
+//		}
+//		cout << "Row " << i + 1 << ": " << longestString << endl;
+//	}
+//}
+//int main()
+//{
+//	int rows = 0, col = 0;
+//	cout << "ENTER NUMBER OF ROWS: ";
+//	cin >> rows;
+//	cout << "ENTER NUMBE ROF COL: ";
+//	cin >> col;
+//	string** array = CreateArray(rows, col);
+//	Input(array, rows, col);
+//	Display(array, rows, col);
+//	findLongestInEachRow(array, rows, col);
+//	for (int i = 0; i < rows; i++) {
+//		delete[] array[i];
+//	}
+//	delete[] array;
+//	return 0;
+//	
+//}
+#include<iostream>
+using namespace std;
+
+int stringLength(const string& str) {
+    return str.length();
+}
+
+string** CreateArray(int rows, int cols) {
+    string** arr = new string * [rows];
+    for (int i = 0; i < rows; i++) {
+        arr[i] = new string[cols];
+    }
+    return arr;
+}
+
+void Input(string** arr, int rows, int cols) {
+    cout << "Enter elements of the array:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << "Row " << i + 1 << ", Column " << j + 1 << ": ";
+            cin >> arr[i][j];
+        }
+    }
+}
+
+void Display(string** arr, int rows, int cols) {
+    cout << "2D String Array:" << endl;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+void findLongestInEachRow(string** arr, int rows, int cols) {
+    cout << endl << "Longest string in each row:" << endl;
+    for (int i = 0; i < rows; i++) {
+        int maxLength = 0;
+        string longestString;
+        for (int j = 0; j < cols; j++) {
+            int length = stringLength(arr[i][j]);
+            if (length > maxLength) {
+                maxLength = length;
+                longestString = arr[i][j];
+            }
+        }
+        cout << "Row " << i + 1 << ": " << longestString << endl;
+    }
+}
+
+int main() {
+    int rows = 0, cols = 0;
+    cout << "Enter number of rows: ";
+    cin >> rows;
+    cout << "Enter number of columns: ";
+    cin >> cols;
+
+    string** array = CreateArray(rows, cols);
+    Input(array, rows, cols);
+    Display(array, rows, cols);
+    findLongestInEachRow(array, rows, cols);
+
+    // Free memory
+    for (int i = 0; i < rows; i++) {
+        delete[] array[i];
+    }
+    delete[] array;
+
+    return 0;
+}
