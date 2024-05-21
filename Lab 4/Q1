@@ -1,0 +1,46 @@
+#include<iostream>
+using namespace std;
+class Rectangle{
+private:
+	int length;
+	int width;
+public:
+	void setLength(int x){
+		length = x;
+	}
+	int getLength(){
+		return length;
+	}
+	void setWidth(int y){
+		width = y;
+	}
+	int getWidth(){
+		return width;
+	}
+	int calculateArea(int len, int wid){
+		int area = 0;
+		area = len*wid;
+		return area;
+	}
+	int CalculatePerimeter(int l, int w){
+		int per = 0;
+		per = 2 * (l+w);
+		return per;
+	}
+};
+int main(){
+	Rectangle obj1;
+	int length, width;
+	cout << "ENTER THE VALUE OF LENGTH: ";
+	cin >> length;
+	cout << "ENTER WIDTH: ";
+	cin >> width;
+	obj1.setLength(length);
+	obj1.setWidth(width);
+	cout << "LENGTH IS: " << obj1.getLength() << endl;
+	cout << "WIDTH IS: " << obj1.getWidth() << endl;
+	cout << "AREA IS: " << obj1.calculateArea(length, width) << endl;
+	cout << "PERIMETER IS: " << obj1.CalculatePerimeter(length, width) << endl;
+	system("pause");
+
+}
