@@ -1,0 +1,65 @@
+//#include<iostream>
+//using namespace std;
+//class Student{
+//private:
+//	int rollno;
+//	char name[50];
+//	int marks;
+//public:
+//	void setRoll(int x){
+//		rollno = x;
+//	}
+//	int getRoll(){
+//		return rollno;
+//	}
+//	void setName(char x[]){
+//		for (int i = 0; i < 50; i++){
+//			name[i] = x[i];
+//		}
+//	}
+//	char getName(char y[]){
+//		for (int i = 0; i < 50; i++){
+//			y[i] = name[i];
+//		}
+//	}
+//	void setMarks(int x){
+//		marks = x;
+//	}
+//	int getMarks(){
+//		return marks;
+//	}
+//	void display(){
+//		cout << rollno << name << marks << endl;
+//	}
+//};
+//int main()
+//{
+//	Student *ptr = nullptr;
+//	int size = 0;
+//	cout << "HOW MANY STUDENTS: ";
+//	cin >> size;
+//	ptr = new Student[size];
+//	for (int i = 0; i < size; i++){
+//		int rollno = 0;
+//		cout << "ENTER ROLL NUMBER: ";
+//		cin >> rollno;
+//		ptr[i].setRoll(rollno);
+//		char name[50];
+//		cout << "ENTER NAME OF STUDENT: ";
+//		cin.ignore();
+//		cin.getline(name, 50);
+//		ptr[i].setName(name);
+//		int marks = 0;
+//		cout << "ENTER MARKS: ";
+//		cin >> marks;
+//		ptr[i].setMarks(marks);
+//		
+//		
+//	}
+//	for (int i = 0; i < size; i++){
+//		ptr[i].display();
+//	}
+//	delete[] ptr;
+//	system("pause");
+//	return 0;
+//}
