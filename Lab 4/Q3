@@ -1,0 +1,79 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+class Car{
+private:
+	char model[50];
+	char make[50];
+	int price;
+public:
+	Car(){
+		cout << "DEFAULT CONSTRUCTOR CALLED " << endl;
+		char model[50] = { 0 };
+		char make[50] = { 0 };
+		int price = 0;
+	}
+	void setModel(char x[]){
+		for (int i = 0; i < 50; i++){
+			model[i] = x[i];
+		}
+	}
+	char getModel( char y[]){
+		for (int i = 0; i < 50; i++){
+			y[i] = model[i];
+		}
+		
+	}
+	void setMake(char x[]){
+		for (int i = 0; i < 50; i++){
+			make[i] = x[i];
+		}
+	}
+	char getMake(char y[]){
+		for (int i = 0; i, 50;i++)
+		y[i] = make[i];
+	}
+	void setPrice(int z){
+		price = z;
+	}
+	int getPrice(){
+		return price;
+	}
+	void display(){
+		cout << model<< " "  << make << " " << price << " "<< endl;
+	}
+	~Car(){
+		cout << "DESTRUCTOR CALLED " << endl;
+	}
+};
+int main()
+{
+	
+	Car *ptr = nullptr;
+	int size = 0;
+	cout << "ENTER NUMBER OF CARS FOR DETAILS: ";
+	cin >> size;
+	ptr = new Car[size];
+	for (int i = 0; i < size; i++){
+		char model[50];
+		cout << "ENTER MODEL: ";
+		cin.ignore();
+		cin.getline(model, 50);
+		ptr[i].setModel(model);
+		char make[50];
+		cout << "ENTER MAKE: ";
+		cin.getline(make, 50);
+		ptr[i].setMake(make);
+		int price = 0;
+		cout << "ENTER PRICE: ";
+		cin >> price;
+		ptr[i].setPrice(price);
+
+	}
+	for (int i = 0; i < size; i++){
+		ptr[i].display();
+	}
+	delete[] ptr;
+	system("pause");
+	return 0;
+}
