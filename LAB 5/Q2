@@ -1,0 +1,45 @@
+/#include<iostream>
+//using namespace std;
+//class Rectangle {
+//private:
+//	int length;
+//	int width;
+//public:
+//	Rectangle() {
+//		length = 0;
+//		width = 0;
+//		cout << "DEFAULT CONSTRUCTOR CALLED " << endl;
+//	}
+//	Rectangle(int l, int w) {
+//		length = l;
+//		width = w;
+//		cout << "PARAMETERISED CONSTRUCTOR CALLED " << endl;
+//	}
+//	Rectangle& setLength(int l) {
+//		this->length = l;
+//		return *this;
+//	}
+//	Rectangle& setWidth(int w) {
+//		this->width = w;
+//		return *this;
+//	}
+//	int area() {
+//		return length * width;
+//	}
+//	int perimeter() {
+//		return 2 * (length + width);
+//	}
+//	~Rectangle() {
+//		cout << "DESTRUCTOR CALLED " << endl;
+//	}
+//};
+//int main()
+//{
+//	Rectangle r1(5,4);
+//	cout << "AREA: " << r1.area() << endl;
+//	cout << "PERIMETER: " << r1.perimeter() << endl;
+//	r1.setLength(7).setWidth(8);
+//	cout << "AREA: " << r1.area() << endl;
+//	cout << "PERIMETER: " << r1.perimeter() << endl;
+//
+//}
