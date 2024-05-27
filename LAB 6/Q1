@@ -1,0 +1,151 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Product {
+private:
+    static int nextID;
+    int productID;
+    string name;
+    double price;
+    bool availability;
+
+public:
+    Product(string name, double price, bool availability)
+        : name(name), price(price), availability(availability) {
+        productID = nextID++;
+    }
+
+    string getName() const {
+        return name;
+    }
+
+    double getPrice() const {
+        return price;
+    }
+
+    bool isAvailable() const {
+        return availability;
+    }
+
+    void updateAvailability(bool available) {
+        availability = available;
+    }
+};
+
+int Product::nextID = 1;
+
+class Order {
+private:
+    static int nextID;
+    int orderID;
+    string date;
+    pair<Product*, int>* products;
+    int productCount;
+
+public:
+    Order(string date) : date(date), productCount(0) {
+        orderID = nextID++;
+        products = new pair<Product*, int>[10]; // Assuming a maximum of 10 products per order
+    }
+
+    void addProduct(Product* product, int quantity) {
+        products[productCount++] = make_pair(product, quantity);
+    }
+
+    double calculateTotal() {
+        double total = 0.0;
+        for (int i = 0; i < productCount; ++i) {
+            total += products[i].first->getPrice() * products[i].second;
+        }
+        return total;
+    }
+
+    void viewOrderDetails() {
+        cout << "Order ID: " << orderID << "\nDate: " << date << endl;
+        cout << "Products:\n";
+        for (int i = 0; i < productCount; ++i) {
+            cout << products[i].first->getName() << " - Quantity: " << products[i].second << endl;
+        }
+        cout << "Total: $" << calculateTotal() << endl;
+    }
+
+    ~Order() {
+        delete[] products;
+    }
+};
+
+int Order::nextID = 1;
+
+class Customer {
+private:
+    static int nextID;
+    int customerID;
+    string name;
+    string address;
+    Order** orders;
+    int orderCount;
+
+public:
+    Customer(string name, string address) : name(name), address(address), orderCount(0) {
+        customerID = nextID++;
+        orders = new Order * [10]; // Assuming a maximum of 10 orders per customer
+    }
+
+    void placeOrder(Order* order) {
+        orders[orderCount++] = order;
+    }
+
+    void viewOrders() {
+        cout << "Customer ID: " << customerID << "\nName: " << name << "\nAddress: " << address << endl;
+        cout << "Orders:\n";
+        for (int i = 0; i < orderCount; ++i) {
+            orders[i]->viewOrderDetails();
+            cout << "-------------------------\n";
+        }
+    }
+
+    ~Customer() {
+        for (int i = 0; i < orderCount; ++i) {
+            delete orders[i];
+        }
+        delete[] orders;
+    }
+};
+
+int Customer::nextID = 1;
+
+int main() {
+    // Sample usage
+    Product p1("Laptop", 999.99, true);
+    Product p2("Phone", 499.99, true);
+    Product p3("Tablet", 299.99, false);
+
+    Customer c1("John Doe", "123 Main St");
+
+    Order o1("2024-03-30");
+    o1.addProduct(&p1, 2);
+    o1.addProduct(&p2, 1);
+    c1.placeOrder(&o1);
+
+    Order o2("2024-03-29");
+    o2.addProduct(&p3, 1);
+    c1.placeOrder(&o2);
+
+    c1.viewOrders();
+
+    return 0;
+}
+Source.cpp
+Displaying Source.cpp.
+Lab 6
+Sallahuddin 1
+•
+Mar 30 (Edited Mar 30)
+10 points
+Due Mar 30, 11:59 PM
+
+OOP Lab-6 (Dependency and Association)
+Google Docs
+Class comments
