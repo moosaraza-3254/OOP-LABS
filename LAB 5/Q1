@@ -1,0 +1,26 @@
+//#include<iostream>
+//using namespace std;
+//class Counter {
+//private:
+//	static int count;
+//public:
+//	static void setCount(int x) {
+//		count = x;
+//	}
+//	static int getCount() {
+//		return count;
+//	}
+//	static void increment() {
+//		count++;
+//	}
+//};
+//int Counter::count = 0;
+//int main()
+//{
+//	Counter c1,c2;
+//	c1.setCount(5);
+//	c1.increment();
+//	cout << "COUNT: " << c1.getCount() << endl;
+//	
+//
+//}
