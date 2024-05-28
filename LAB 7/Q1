@@ -1,0 +1,153 @@
+#include<iostream>
+#include<string>
+using namespace std;
+
+class Subject {
+private:
+    string subjectName;
+    string teacherName;
+
+public:
+    Subject(string subjectName, string teacherName) {
+        this->subjectName = subjectName;
+        this->teacherName = teacherName;
+    }
+
+    string getSubjectName() const {
+        return subjectName;
+    }
+
+    string getTeacherName() const {
+        return teacherName;
+    }
+};
+
+class Teacher {
+private:
+    string teacherName;
+    Subject* subjects[10];
+
+public:
+    Teacher(string teacherName) {
+        this->teacherName = teacherName;
+        for (int i = 0; i < 10; i++) {
+            subjects[i] = nullptr;
+        }
+    }
+
+    string getTeacherName() const {
+        return teacherName;
+    }
+
+    void addSubject(const string& subjectName) {
+        for (int i = 0; i < 10; ++i) {
+            if (subjects[i] == nullptr) {
+                subjects[i] = new Subject(subjectName, teacherName);
+                break;
+            }
+        }
+    }
+
+    void viewSubjects() const {
+        cout << "Subjects taught by " << teacherName << ":" << endl;
+        for (int i = 0; i < 10; ++i) {
+            if (subjects[i] != nullptr) {
+                cout << "Subject: " << subjects[i]->getSubjectName() << endl;
+            }
+        }
+    }
+};
+
+class Course {
+private:
+    string courseCode;
+    string courseName;
+    string teacherName;
+
+public:
+    Course(string courseName, string courseCode, string teacherName) {
+        this->courseCode = courseCode;
+        this->courseName = courseName;
+        this->teacherName = teacherName;
+    }
+
+    string getCourseName() const {
+        return courseName;
+    }
+
+    string getCourseCode() const {
+        return courseCode;
+    }
+
+    string getTeacherName() const {
+        return teacherName;
+    }
+};
+
+class Student {
+private:
+    string studentName;
+    int rollno;
+    Course* courses[10];
+
+public:
+    Student(string studentName, int rollno) {
+        this->studentName = studentName;
+        this->rollno = rollno;
+        for (int i = 0; i < 10; i++) {
+            courses[i] = nullptr;
+        }
+    }
+
+    string getStudentName() const {
+        return studentName;
+    }
+
+    int getRollNumber() const {
+        return rollno;
+    }
+
+    void enrollCourse(const string& courseName, const string& courseCode, const string& teacherName) {
+        for (int i = 0; i < 10; i++) {
+            if (courses[i] == nullptr) {
+                courses[i] = new Course(courseName, courseCode, teacherName);
+                break;
+            }
+        }
+    }
+
+    void viewCourses() const {
+        cout << "Courses enrolled by " << studentName << " (Roll Number: " << rollno << "):" << endl;
+        for (int i = 0; i < 10; ++i) {
+            if (courses[i] != nullptr) {
+                cout << "Course Name: " << courses[i]->getCourseName() << ", Course Code: " << courses[i]->getCourseCode()
+                    << ", Teacher: " << courses[i]->getTeacherName() << endl;
+            }
+        }
+    }
+};
+
+int main()
+{
+    Teacher teacher1("SALMAN");
+    Teacher teacher2("ANOSHA");
+    teacher1.addSubject("DLD");
+    teacher1.addSubject("ICT");
+    teacher2.addSubject("PF");
+    teacher2.addSubject("OOP");
+    Student student1("MOOSA", 2546);
+    Student student2("ALI", 3013);
+    student1.enrollCourse("PF", "CS1001", "ANOSHA");
+    student1.enrollCourse("OOP", "CS1002", "ANOSHA");
+    student2.enrollCourse("DLD", "EE1001", "SALMAN");
+    student2.enrollCourse("ICT", "EE1002", "SALMAN");
+    teacher1.viewSubjects();
+    cout << endl;
+    teacher2.viewSubjects();
+    cout << endl;
+    student1.viewCourses();
+    cout << endl;
+    student2.viewCourses();
+
+    return 0;
+}
