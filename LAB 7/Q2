@@ -1,0 +1,107 @@
+#include<iostream>
+#include<string>
+using namespace std;
+class Book {
+private:
+	string title;
+	string author; 
+	int pubYear;
+public:
+	Book(const string& title, const string& author, int pubYear) {
+		this->title = title;
+		this->author = author;
+		this->pubYear = pubYear;
+	}
+	string getTitle() {
+		return title;
+	}
+	string getAuthor() {
+		return author;
+	}
+	int getPubYear() {
+		return pubYear;
+	}
+};
+class Library {
+private:
+	Book* books[50];
+	int noOfbooks;
+public:
+	Library() {
+		noOfbooks = 0;
+	}
+	void addbook( const Book& book) {
+		if (noOfbooks < 50) {
+			books[noOfbooks++] = new Book(book);
+			cout << "BOOK ADDED TO LIBRARY " << endl;
+		}
+		else {
+			cout << "NO SPACE AVAILABLE IN THE LIBRARY " << endl;
+		}
+	}
+	void displaybooks() {
+		if (noOfbooks == 0) {
+			cout << "NO BOOKS AVAILABLE IN THE LIBRARY " << endl;
+		}
+		else {
+			cout << "BOOKS IN THE LIBRARY: " << endl;
+			for (int i = 0; i < noOfbooks; i++) {
+				cout << "TITLE: " << books[i]->getTitle() << ",AUTHOR: " << books[i]->getAuthor() <<
+					",PUBLICATION YEAR: " << books[i]->getPubYear() << endl;
+			}
+		}
+	}
+	void searchBYtitle(const string& title) {
+		bool found = false;
+		for (int i = 0; i < noOfbooks; i++) {
+			if (books[i]->getTitle() == title) {
+				cout << "BOOK FOUND: " << endl;
+				cout << "Title: " << books[i]->getTitle() << ", Author: " << books[i]->getAuthor()
+					<< ", Publication Year: " << books[i]->getPubYear() << endl;
+				found = true;
+			}
+		}
+		if (!found) {
+			cout << "BOOK NOT FOUND " << endl;
+		}
+	}
+	void searchByAuthor(const std::string& author) const {
+		bool found = false;
+		for (int i = 0; i < noOfbooks; ++i) {
+			if (books[i]->getAuthor() == author) {
+				if (!found) {
+					cout << "Books by " << author << ":" << std::endl;
+				}
+				cout << "Title: " << books[i]->getTitle() << ", Author: " << books[i]->getAuthor()
+					<< ", Publication Year: " << books[i]->getPubYear() << std::endl;
+				found = true;
+			}
+		}
+		if (!found) {
+			cout << "No books found by " << author << "." << std::endl;
+		}
+	}
+	~Library() {
+		for (int i = 0; i < noOfbooks; ++i) {
+			delete books[i];
+		}
+	}
+};
+int main()
+{
+	Library library;
+	library.addbook(Book("INTRO TO PROGRAMMING","DS MALIK",1988));
+	library.addbook(Book("DISCRETE MATH", "CHARLIE", 1958));
+	library.addbook(Book("THOMAS CALCULAS", "THOMAS", 1888));
+	library.addbook(Book("OOPSIE BOOK", "USER UNKNOWN", 2004));
+	cout << "All Books in the Library:" << std::endl;
+	library.displaybooks();
+	cout << endl;
+	std::cout << "SEARCHING FOR A BOOK BY TITLE: " << endl;
+	library.searchBYtitle("OOPSIE BOOK");
+	cout << endl;
+	s:cout << "Searching for books by author:" << std::endl;
+	library.searchByAuthor("DS MALIK");
+	return 0;
+
+}
