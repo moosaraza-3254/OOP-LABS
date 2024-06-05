@@ -1,0 +1,100 @@
+#include<iostream>
+using namespace std;
+class Account {
+protected:
+	int acc_num;
+	string acc_holder;
+	int balance;
+public:
+	Account() {
+		cout << "DEFAULT CONSTRUCTOR CALLED " << endl;
+		acc_num = 0;
+		acc_holder = "";
+		balance = 0;
+	}
+	Account(int acc_num, string acc_holder, int balance) {
+		cout << "PARAMETERISED CONSTRUCTOR CALLED " << endl;
+		this->acc_num = acc_num;
+		this->acc_holder = acc_holder;
+		this->balance = balance;
+	}
+	void setAccNum(int acn) {
+		acc_num = acn;
+	}
+	void setAccHolder(string acch) {
+		acc_holder = acch;
+	}
+	void setBalance(int bal) {
+		balance = bal;
+	}
+	int getACCNUM() {
+		return acc_num;
+	}
+	string getACCHOLDER() {
+		return acc_holder;
+	}
+	int getBalance() {
+		return balance;
+	}
+	int deposit(int balance) {
+		cout << "ENTER AMOUNT YOU WANT TO DEPOSIT: ";
+		int amount;
+		cin >> amount;
+		balance = balance + amount;
+		return balance;
+	}
+	int withdraw(int balance) {
+		cout << "ENTER AMOUNT YOU WANT TO WITHDRAW: ";
+		int amount;
+		cin >> amount;
+		balance = balance - amount;
+		return balance;
+	}
+	void displayinfo() {
+		cout << "ACC NO: " << acc_num << " " << "ACC HOLDER: " << acc_holder << " " << "BALANCE: " << balance << endl;
+	}
+};
+class Savings : public Account {
+private:
+	int interest_rate;
+public: 
+	Savings() {
+		interest_rate = 0;
+	}
+	Savings(int interest) {
+		interest_rate = interest;
+	}
+	void setInterest(int intr) {
+		interest_rate = intr;
+	}
+	int getInterest() {
+		return interest_rate;
+	}
+	void displayinfo() {
+		Account::displayinfo();
+		cout << "interest rate: " << interest_rate << endl;
+	}
+};
+int main() {
+	Savings obj1;
+	cout << "ENTER THE DETAILS OF ACC ";
+	cout << " ENTER ACCOUNT NUMBER: ";
+	int accnum1;
+	cin >> accnum1;
+	obj1.setAccNum(accnum1);
+	cout << "ENTER NAME OF ACCOUNT HOLDER: ";
+	string acch1;
+	cin >> acch1;
+	obj1.setAccHolder(acch1);
+	cout << "ENTER BALANCE: ";
+	int bal1;
+	cin >> bal1;
+	obj1.setBalance(bal1);
+	cout << "ENTER INTEREST: ";
+	int intr1;
+	cin >> intr1;
+	obj1.setInterest(intr1);
+	obj1.displayinfo();
+
+
+}
