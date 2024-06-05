@@ -1,0 +1,189 @@
+#include<iostream>
+using namespace std;
+class Vehicle {
+protected:
+	string make;
+	string model;
+	int year;
+	int mileage;
+public:
+	Vehicle() {
+		cout << "DEFAULT COST CALLED " << endl;
+		make = "";
+		model = "";
+		year = 0;
+		mileage = 0;
+	}
+	Vehicle(string make, string model, int year, int mileage) {
+		cout << "PARAMETERIZED CALLED " << endl;
+		this->make = make;
+		this->model = model;
+		this->year = year;
+		this->mileage = mileage;
+	}
+	void display_info() {
+		cout << "MAKE: " << make << " " << "MODEL: " << model << " " << "YEAR: " << year << " " << "MILEAGE : " << mileage << endl;
+	}
+	void setMake(string mk) {
+		make = mk;
+	}
+	void setModel(string md) {
+		model = md;
+	}
+	void setYear(int y) {
+		year = y;
+	}
+	void setMileage(int ml) {
+		mileage = ml;
+	}
+	string getMake() {
+		return make;
+	}
+	string getModel() {
+		return model;
+	}
+	int getYear() {
+		return year;
+	}
+	int getMileage() {
+		return mileage;
+	}
+};
+class Car : public Vehicle {
+private:
+	int num_door;
+public:
+	void setNUMDOOR(int nd) {
+		num_door = nd;
+
+	}
+	int getNUMDOOR() {
+		return num_door;
+	}
+
+	Car() {
+		num_door = 0;
+	}
+	Car(int nd) {
+		num_door = nd;
+	}
+	void displayinfo() {
+		Vehicle::display_info();
+		cout << "NUM OF DOOR: " << num_door << endl;
+	}
+};
+class Truck : public Vehicle {
+private:
+	int cargo_capacity;
+public:
+	Truck() {
+		cargo_capacity = 0;
+	}
+	Truck(int cgp) {
+		cargo_capacity = cgp;
+	}
+	void setCARGOCAP(int cgp) {
+		cargo_capacity = cgp;
+	}
+	int getCARGOCAP() {
+		return cargo_capacity;
+	}
+	void displayinfo() {
+		Vehicle::display_info();
+		cout << "CARGO CAPACITY IS: " << cargo_capacity << " kg" << endl;
+	}
+};
+class Motorcycle : public Vehicle {
+private:
+	int sideCAR;
+public:
+	Motorcycle() {
+		sideCAR = 0;
+	}
+	Motorcycle(int sc) {
+		sideCAR = sc;
+	}
+	void setSIDECAR(int sc) {
+		sideCAR = sc;
+	}
+	int getSIDECAR() {
+		return sideCAR;
+	}
+	void displayinfo() {
+		Vehicle::display_info();
+		cout << "SIDE CAR: " << sideCAR << endl;
+	}
+};
+int main() {
+	Car obj1;
+	cout << "CREATING OBJECT OF CAR " << endl;
+	string make;
+	cout << "ENTER MAKE: ";
+	cin >> make;
+	obj1.setMake(make);
+	string model;
+	cout << "ENTER MODEL: ";
+	cin >> model;
+	obj1.setModel(model);
+	int year;
+	cout << "ENTER YEAR: ";
+	cin >> year;
+	obj1.setYear(year);
+	int mileage;
+	cout << "ENTER MILEAGE: ";
+	cin >> mileage;
+	obj1.setMileage(mileage);
+	int numd;
+	cout << "ENTER NUM OF DOORS: ";
+	cin >> numd;
+	obj1.setNUMDOOR(numd);
+	obj1.displayinfo();
+	Truck obj2;
+	cout << "------------------------------------------------------------------------" << endl;
+	cout << "CREATING OBJECT OF TRUCK " << endl;
+	string make2;
+	cout << "ENTER MAKE: ";
+	cin >> make2;
+	obj2.setMake(make2);
+	string model2;
+	cout << "ENTER MODEL: ";
+	cin >> model2;
+	obj2.setModel(model2);
+	int year2;
+	cout << "ENTER YEAR: ";
+	cin >> year2;
+	obj2.setYear(year2);
+	int mileage2;
+	cout << "ENTER MILEAGE: ";
+	cin >> mileage2;
+	obj2.setMileage(mileage2);
+	int CGP2;
+	cout << "ENTER CARGO CAPACITY: ";
+	cin >> CGP2;
+	obj2.setCARGOCAP(CGP2);;
+	obj2.displayinfo();
+	Motorcycle obj3;
+	cout << "_______________________________________________________________________" << endl;
+	cout << "CREATING OBJECT OF MOTORCYCLE " << endl;
+	string make3;
+	cout << "ENTER MAKE: ";
+	cin >> make3;
+	obj3.setMake(make3);
+	string model3;
+	cout << "ENTER MODEL: ";
+	cin >> model3;
+	obj3.setModel(model3);
+	int year3;
+	cout << "ENTER YEAR: ";
+	cin >> year3;
+	obj3.setYear(year3);
+	int mileage3;
+	cout << "ENTER MILEAGE: ";
+	cin >> mileage3;
+	obj3.setMileage(mileage3);
+	int sideCar;
+	cout << "ENTER SIDE CAR: ";
+	cin >> sideCar;
+	obj3.setSIDECAR(sideCar);
+	obj3.displayinfo();
+}
