@@ -1,0 +1,129 @@
+#include<iostream>
+#include<string>
+using namespace std;
+class LibraryItem {
+protected:
+	string title;
+	int itemID;
+	bool ischeckout;
+public:
+	LibraryItem() {
+		title = "";
+		itemID = 0;
+		ischeckout = false;
+	}
+	LibraryItem(string title, int id) {
+		this->title = title;
+		itemID = id;
+		ischeckout = false;
+	}
+	virtual void display_details() = 0; 
+	virtual void checkout() = 0; 
+};
+class Book : public LibraryItem {
+private:
+	string author;
+public:
+	Book() {
+		author = "";
+	}
+	Book(string t,string aut,int id) {
+		title = t;
+		author = aut;
+		itemID = id;
+	}
+	void setAuthor(string aut) {
+		author = aut;
+	}
+	string getAuthor() {
+		return author;
+	}
+	void display_details() override {
+		cout << "BOOK: " << title << "BY " << author << endl;
+	}
+	void checkout() override {
+		if (!ischeckout) {
+			ischeckout = true;
+			cout << "BOOK " << title << " CHECKED OUT SUCCESSFULLY." << endl;
+		}
+		else {
+			cout << "BOOK " << title << "IS ALREADY CHECKED OUT " << endl;
+		}
+	}
+};
+class Journel : public LibraryItem {
+private:
+	int issuenum;
+public:
+	Journel() {
+		issuenum = 0;
+	}
+	Journel(string t,int num,int id) {
+		issuenum = num;
+		title = t;
+		itemID = id;
+	}
+	void setISSUENUM(int num) {
+		issuenum = num;
+	}
+	int setNUM() {
+		return issuenum;
+	}
+	void display_details() override {
+		cout << "JOURNEL: " << title << " , ISSUE NUMBER: " << issuenum << endl;
+	}
+	void checkout() override {
+		if (!ischeckout) {
+			ischeckout = true;
+			cout << "Journal " << title << ", Issue " << issuenum << " checked out successfully." << endl;
+		}
+		else {
+			cout << "Journal " << title << ", Issue " << issuenum << " is already checked out." << endl;
+		}
+	}
+};
+class LibraryUser {
+protected:
+	string name;
+public:
+	LibraryUser(string n) : name(n) {}
+	virtual void display_details() = 0; // Pure virtual function
+};
+
+// Derived class Library Member
+class LibraryMember : public LibraryUser {
+	int memberID;
+public:
+	LibraryMember(string n, int id) : LibraryUser(n), memberID(id) {}
+	void display_details() override {
+		cout << "Library Member: " << name << ", Member ID: " << memberID << endl;
+	}
+};
+class Guest : public LibraryUser {
+public:
+	Guest(string n) : LibraryUser(n) {}
+	void display_details() override {
+		cout << "Guest User: " << name << endl;
+	}
+};
+int main() {
+	Book book1("The Great Gatsby", "F. Scott Fitzgerald", 101);
+	Journel journel1("Scientific American", 123, 201);
+	LibraryMember member1("John Doe", 301);
+	Guest guest1("Jane Smith");
+
+	// Polymorphic behavior
+	LibraryItem* item1 = &book1;
+	LibraryItem* item2 = &journel1;
+	LibraryUser* user1 = &member1;
+	LibraryUser* user2 = &guest1;
+
+	item1->display_details();
+	item1->checkout();
+	item2->display_details();
+	item2->checkout();
+	user1->display_details();
+	user2->display_details();
+
+	return 0;
+}
